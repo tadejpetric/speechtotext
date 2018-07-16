@@ -40,10 +40,16 @@ def output(request):
         print(len(content))
         audio = types.RecognitionAudio(content=content)
         config = types.RecognitionConfig(
+            encoding=enums.RecognitionConfig.AudioEncoding.LINEAR16,
+            language_code='sl-SI')
+        """
+        config = types.RecognitionConfig(
             encoding=enums.RecognitionConfig.AudioEncoding.OGG_OPUS,
             sample_rate_hertz=48000,
-            language_code='sl-SI')
-
+            language_code='sl-SI')"""
+    
+    with open("test.ogg", "wb") as f:
+        f.write(content)
     # Detects speech in the audio file
     response = client.recognize(config, audio)
     a = ""

@@ -58,7 +58,7 @@
       currCallback = cb || config.callback;
       worker.postMessage({ command: 'getBuffers' })
     }
-
+/*
     this.exportWAV = function(cb, type){
       currCallback = cb || config.callback;
       type = type || config.type || 'audio/wav';
@@ -68,7 +68,7 @@
         type: type
       });
     }
-
+*/
     this.exportMonoWAV = function(cb, type){
       currCallback = cb || config.callback;
       type = type || config.type || 'audio/wav';
@@ -89,6 +89,14 @@
   };
 
   Recorder.setupDownload = function(blob, filename){
+	  var xhr = new XMLHttpRequest();
+  xhr.open('POST', 'output', true); //my url had the ID of the item that the blob corresponded to
+  xhr.responseType = 'blob';
+  var csrf = jQuery("[name=csrfmiddlewaretoken]").val();// getCookie('csrftoken')
+  console.log(csrf)
+  xhr.setRequestHeader("X-CSRFtoken",csrf); //if you are doing CSRF stuff
+  console.log(blob.size + "haha")
+  xhr.send(blob);
     var url = (window.URL || window.webkitURL).createObjectURL(blob);
     var link = document.getElementById("save");
     link.href = url;

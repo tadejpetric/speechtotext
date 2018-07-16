@@ -12,9 +12,10 @@ this.onmessage = function(e){
     case 'record':
       record(e.data.buffer);
       break;
+	 /*
     case 'exportWAV':
       exportWAV(e.data.type);
-      break;
+      break;*/
     case 'exportMonoWAV':
       exportMonoWAV(e.data.type);
       break;
@@ -36,7 +37,7 @@ function record(inputBuffer){
   recBuffersR.push(inputBuffer[1]);
   recLength += inputBuffer[0].length;
 }
-
+/*
 function exportWAV(type){
   var bufferL = mergeBuffers(recBuffersL, recLength);
   var bufferR = mergeBuffers(recBuffersR, recLength);
@@ -46,7 +47,7 @@ function exportWAV(type){
 
   this.postMessage(audioBlob);
 }
-
+*/
 function exportMonoWAV(type){
   var bufferL = mergeBuffers(recBuffersL, recLength);
   var dataview = encodeWAV(bufferL, true);
@@ -109,7 +110,7 @@ function writeString(view, offset, string){
 function encodeWAV(samples, mono){
   var buffer = new ArrayBuffer(44 + samples.length * 2);
   var view = new DataView(buffer);
-
+alert(mono);
   /* RIFF identifier */
   writeString(view, 0, 'RIFF');
   /* file length */

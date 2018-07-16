@@ -1,11 +1,11 @@
 {% load static %}
-<html>
+<!--<html>
 
 <head>
     <!--
         <script src="{% static 'speech/recorder.js' %}"></script>
         <script src="{% static 'speech/main.js' %}"></script>
-    -->
+    
 </head>
 
 
@@ -31,4 +31,25 @@
     </ul>
 </body>
 
+</html>
+-->
+<!doctype html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Audio Recorder</title>
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+	<script src="{% static 'speech/audiodisplay.js' %}"></script>
+	<script src="{% static 'speech/recorder.js' %}"></script>
+	<script src="{% static 'speech/main.js' %}"></script>
+</head>
+<body>
+        <form id="forma" action="{% url 'output' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+	<div id="controls">
+		<button type="button" id="record" onclick="toggleRecording(this);">start</button>
+		<a id="save" href="#">end</a>
+    </div>
+    </form>
+</body>
 </html>
